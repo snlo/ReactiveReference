@@ -23,8 +23,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         
+        window?.rootViewController = ReactiveOCViewController.init()
 //        window?.rootViewController = ReactiveViewController.init()
-        window?.rootViewController = RxViewController.init()
+//        window?.rootViewController = RxViewController.init()
         
         window?.makeKeyAndVisible()
     }

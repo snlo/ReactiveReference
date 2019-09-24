@@ -6,7 +6,14 @@ target 'ReactiveReference' do
   use_frameworks!
 
   # Pods for ReactiveReference
+  
+  # ReactiveCocoa Swift实现
   pod 'ReactiveCocoa'
+  
+  # ReactiveCocoa OC实现
+  pod 'ReactiveObjC'
+  
+  # 只有 Swift实现
   pod 'RxCocoa'
 
   target 'ReactiveReferenceTests' do
