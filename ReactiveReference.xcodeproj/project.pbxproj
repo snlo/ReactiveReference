@@ -15,11 +15,12 @@
 		985BD9792339B60200CEF5C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 985BD9782339B60200CEF5C9 /* Assets.xcassets */; };
 		985BD97C2339B60200CEF5C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 985BD97A2339B60200CEF5C9 /* LaunchScreen.storyboard */; };
 		985BD9872339B60200CEF5C9 /* ReactiveReferenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BD9862339B60200CEF5C9 /* ReactiveReferenceTests.swift */; };
-		985BD9942339C1F200CEF5C9 /* RxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BD9932339C1F200CEF5C9 /* RxViewController.swift */; };
 		985BD9A72339FD9900CEF5C9 /* ReactiveOCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 985BD9A52339FD9900CEF5C9 /* ReactiveOCViewController.m */; };
 		985BD9A82339FD9900CEF5C9 /* ReactiveOCViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 985BD9A62339FD9900CEF5C9 /* ReactiveOCViewController.xib */; };
 		985BD9C5233B3FD800CEF5C9 /* ReactiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BD9C3233B3FD800CEF5C9 /* ReactiveViewController.swift */; };
 		985BD9C6233B3FD800CEF5C9 /* ReactiveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 985BD9C4233B3FD800CEF5C9 /* ReactiveViewController.xib */; };
+		985BD9C9233B555300CEF5C9 /* RxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985BD9C7233B555300CEF5C9 /* RxViewController.swift */; };
+		985BD9CA233B555300CEF5C9 /* RxViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 985BD9C8233B555300CEF5C9 /* RxViewController.xib */; };
 		D8DF5D42C4D121DDB24D25B4 /* Pods_ReactiveReference.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 892BF9D0165206B2A864033E /* Pods_ReactiveReference.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,13 +49,14 @@
 		985BD9822339B60200CEF5C9 /* ReactiveReferenceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReactiveReferenceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		985BD9862339B60200CEF5C9 /* ReactiveReferenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactiveReferenceTests.swift; sourceTree = "<group>"; };
 		985BD9882339B60200CEF5C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		985BD9932339C1F200CEF5C9 /* RxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxViewController.swift; sourceTree = "<group>"; };
 		985BD9952339F85200CEF5C9 /* ReactiveReference-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ReactiveReference-Bridging-Header.h"; sourceTree = "<group>"; };
 		985BD9A42339FD9900CEF5C9 /* ReactiveOCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReactiveOCViewController.h; sourceTree = "<group>"; };
 		985BD9A52339FD9900CEF5C9 /* ReactiveOCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReactiveOCViewController.m; sourceTree = "<group>"; };
 		985BD9A62339FD9900CEF5C9 /* ReactiveOCViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReactiveOCViewController.xib; sourceTree = "<group>"; };
 		985BD9C3233B3FD800CEF5C9 /* ReactiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactiveViewController.swift; sourceTree = "<group>"; };
 		985BD9C4233B3FD800CEF5C9 /* ReactiveViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReactiveViewController.xib; sourceTree = "<group>"; };
+		985BD9C7233B555300CEF5C9 /* RxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxViewController.swift; sourceTree = "<group>"; };
+		985BD9C8233B555300CEF5C9 /* RxViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RxViewController.xib; sourceTree = "<group>"; };
 		AAADFAF261657DC261ED6396 /* Pods-ReactiveReference.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveReference.release.xcconfig"; path = "Target Support Files/Pods-ReactiveReference/Pods-ReactiveReference.release.xcconfig"; sourceTree = "<group>"; };
 		B9D71B9ADB3D03FA65E3CAA1 /* Pods_ReactiveReferenceTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactiveReferenceTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE7C77ED2542BD719B678547 /* Pods-ReactiveReferenceTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveReferenceTests.release.xcconfig"; path = "Target Support Files/Pods-ReactiveReferenceTests/Pods-ReactiveReferenceTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -158,7 +160,8 @@
 		985BD9AB2339FDF300CEF5C9 /* RxSwift */ = {
 			isa = PBXGroup;
 			children = (
-				985BD9932339C1F200CEF5C9 /* RxViewController.swift */,
+				985BD9C7233B555300CEF5C9 /* RxViewController.swift */,
+				985BD9C8233B555300CEF5C9 /* RxViewController.xib */,
 			);
 			path = RxSwift;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 				985BD9A82339FD9900CEF5C9 /* ReactiveOCViewController.xib in Resources */,
 				985BD9C6233B3FD800CEF5C9 /* ReactiveViewController.xib in Resources */,
 				985BD9792339B60200CEF5C9 /* Assets.xcassets in Resources */,
+				985BD9CA233B555300CEF5C9 /* RxViewController.xib in Resources */,
 				985BD9772339B60000CEF5C9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -347,9 +351,9 @@
 			files = (
 				985BD9742339B60000CEF5C9 /* ViewController.swift in Sources */,
 				985BD9A72339FD9900CEF5C9 /* ReactiveOCViewController.m in Sources */,
+				985BD9C9233B555300CEF5C9 /* RxViewController.swift in Sources */,
 				985BD9702339B60000CEF5C9 /* AppDelegate.swift in Sources */,
 				985BD9722339B60000CEF5C9 /* SceneDelegate.swift in Sources */,
-				985BD9942339C1F200CEF5C9 /* RxViewController.swift in Sources */,
 				985BD9C5233B3FD800CEF5C9 /* ReactiveViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
