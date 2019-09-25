@@ -11,22 +11,11 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-    var window: UIWindow?
-
+//    var window: UIWindow?
+    
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        
-        window?.rootViewController = ReactiveOCViewController.init()
-//        window?.rootViewController = ReactiveViewController.init()
-//        window?.rootViewController = RxViewController.init()
-        
-        window?.makeKeyAndVisible()
-        
         return true
     }
 

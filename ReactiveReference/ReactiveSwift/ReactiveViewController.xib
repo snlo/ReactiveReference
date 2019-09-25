@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ReactiveViewController" customModule="ReactiveReference" customModuleProvider="target">
+            <connections>
+                <outlet property="buttonTest" destination="8HY-7l-585" id="L79-j7-Zeg"/>
+                <outlet property="labelTest" destination="AxM-bm-K18" id="tm8-np-Ytr"/>
+                <outlet property="tableView" destination="v1K-rD-w93" id="c9f-53-bJk"/>
+                <outlet property="textFieldTest" destination="XAr-M7-EJc" id="wuF-hd-EKn"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="v1K-rD-w93">
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                </tableView>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XAr-M7-EJc">
+                    <rect key="frame" x="20" y="431" width="374" height="34"/>
+                    <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8HY-7l-585">
+                    <rect key="frame" x="20" y="485" width="374" height="30"/>
+                    <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <state key="normal" title="Button">
+                        <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    </state>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AxM-bm-K18">
+                    <rect key="frame" x="20" y="390.5" width="374" height="20.5"/>
+                    <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="v1K-rD-w93" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="210-0T-Z39"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="AxM-bm-K18" secondAttribute="trailing" constant="20" id="6Gj-Nv-Ndh"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="XAr-M7-EJc" secondAttribute="trailing" constant="20" id="Du3-ON-ysz"/>
+                <constraint firstItem="XAr-M7-EJc" firstAttribute="top" secondItem="AxM-bm-K18" secondAttribute="bottom" constant="20" id="H7e-5H-A7t"/>
+                <constraint firstItem="8HY-7l-585" firstAttribute="top" secondItem="XAr-M7-EJc" secondAttribute="bottom" constant="20" id="JTD-j0-rxt"/>
+                <constraint firstItem="XAr-M7-EJc" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="TzR-yx-h9p"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="v1K-rD-w93" secondAttribute="trailing" id="ZCS-sl-shW"/>
+                <constraint firstItem="8HY-7l-585" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="ez3-an-KCd"/>
+                <constraint firstItem="XAr-M7-EJc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="fiz-ny-WU0"/>
+                <constraint firstItem="AxM-bm-K18" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="jY6-Ng-6lN"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="v1K-rD-w93" secondAttribute="bottom" id="mTR-yW-Zr9"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8HY-7l-585" secondAttribute="trailing" constant="20" id="vPt-gr-3F4"/>
+                <constraint firstItem="v1K-rD-w93" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="vo6-Qc-4aR"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="137.68115942028987" y="136.60714285714286"/>
+        </view>
+    </objects>
+</document>

@@ -10,6 +10,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ReactiveOCViewController">
             <connections>
+                <outlet property="buttonNext" destination="LFY-DO-fm5" id="wWj-nr-SlC"/>
+                <outlet property="labelTest" destination="q8V-rZ-WJs" id="VVn-Cx-6J9"/>
                 <outlet property="tableView" destination="ZJY-oC-fsW" id="P1O-bk-59a"/>
                 <outlet property="textFieldTest" destination="Of4-D1-Rh2" id="cD5-1J-fOS"/>
                 <outlet property="view" destination="aSt-iL-kC4" id="Gdu-Hn-57h"/>
@@ -24,15 +26,18 @@
                     <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Of4-D1-Rh2">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Of4-D1-Rh2">
                     <rect key="frame" x="24" y="431" width="366" height="34"/>
+                    <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q8V-rZ-WJs">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q8V-rZ-WJs">
                     <rect key="frame" x="24" y="386.5" width="366" height="20.5"/>
+                    <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
+                    <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LFY-DO-fm5">
@@ -60,7 +65,6 @@
                 <constraint firstItem="2h6-0J-OnK" firstAttribute="trailing" secondItem="Of4-D1-Rh2" secondAttribute="trailing" constant="24" id="NtJ-Hr-1FL"/>
                 <constraint firstItem="Of4-D1-Rh2" firstAttribute="leading" secondItem="2h6-0J-OnK" secondAttribute="leading" constant="24" id="YeC-JB-Slh"/>
                 <constraint firstItem="q8V-rZ-WJs" firstAttribute="leading" secondItem="2h6-0J-OnK" secondAttribute="leading" constant="24" id="ZVt-jh-L0S"/>
-                <constraint firstItem="Of4-D1-Rh2" firstAttribute="centerX" secondItem="aSt-iL-kC4" secondAttribute="centerX" id="buL-Z4-hTc"/>
                 <constraint firstItem="LFY-DO-fm5" firstAttribute="top" secondItem="Of4-D1-Rh2" secondAttribute="bottom" constant="24" id="eQ5-RY-dAG"/>
                 <constraint firstItem="2h6-0J-OnK" firstAttribute="trailing" secondItem="LFY-DO-fm5" secondAttribute="trailing" constant="24" id="jDs-OM-IQ5"/>
                 <constraint firstItem="ZJY-oC-fsW" firstAttribute="top" secondItem="2h6-0J-OnK" secondAttribute="top" id="y5M-uD-KAW"/>

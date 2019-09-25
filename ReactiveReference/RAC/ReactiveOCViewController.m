@@ -77,13 +77,15 @@ static NSString * kIdentifier = @"RACViewController_cell";
         }
     }];
     
-//    RAC(self.labelTest, textColor) = [RACSignal combineLatest:@[RACObserve(self.buttonNext, enabled), self.textFieldTest.rac_textSignal] reduce:^(NSNumber * x1, NSString * x2){
-//        if ([x1 boolValue] && x2.length > 5) {
-//            return [UIColor greenColor];
-//        } else {
-//            return [UIColor redColor];
-//        }
-//    }];
+
+    RAC(self.labelTest, textColor) = [RACSignal combineLatest:@[RACObserve(self.buttonNext, enabled), self.textFieldTest.rac_textSignal] reduce:^(NSNumber * x1, NSString * x2){
+        if ([x1 boolValue] && x2.length > 5) {
+            return [UIColor greenColor];
+        } else {
+            return [UIColor redColor];
+        }
+    }];
+    
 
 #pragma mark -- 订阅信号
     [[self.buttonNext rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
@@ -114,7 +116,7 @@ static NSString * kIdentifier = @"RACViewController_cell";
     
 }
 
-#pragma mark -- UITableViewDataSource
+#pragma mark -- UITableViewDataSource, UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 3;
 }
@@ -132,7 +134,10 @@ static NSString * kIdentifier = @"RACViewController_cell";
     return cell;
 }
 
-
+#pragma mark -- UIScrollViewDelegate
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self.view endEditing:YES];
+}
 
 
 @end
