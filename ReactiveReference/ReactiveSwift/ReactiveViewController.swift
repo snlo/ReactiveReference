@@ -71,6 +71,10 @@ class ReactiveViewController: UIViewController {
         
     }
     
+    deinit {
+        print("销毁")
+    }
+    
 }
 
 // MARK: - UITableViewDelegate, UITableViewDataSource

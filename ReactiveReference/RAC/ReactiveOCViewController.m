@@ -27,6 +27,11 @@ static NSString * kIdentifier = @"RACViewController_cell";
 
 @implementation ReactiveOCViewController
 
+- (void)dealloc
+{
+    NSLog(@"销毁");
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.

@@ -31,6 +31,9 @@ class RxViewController: UIViewController {
         
     }
 
+    deinit {
+        print("销毁")
+    }
 
 }
 
