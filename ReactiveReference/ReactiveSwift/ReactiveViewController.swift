@@ -9,6 +9,7 @@
 import UIKit
 
 import ReactiveCocoa
+import ReactiveSwift
 
 class ReactiveViewController: UIViewController {
 
@@ -33,7 +34,8 @@ class ReactiveViewController: UIViewController {
         // MARK: - 属性监听
         let viewProgress = UIProgressView.init()
         // viewProgress.progress
-        viewProgress.reactive.producer(forKeyPath: "progress").startWithValues { [weak self] (p : Any?) in guard let self = self else {return}
+        viewProgress.reactive.producer(forKeyPath: "progress").startWithValues { [weak self] (p : Any?) in
+            guard let self = self else {return}
             
             guard let v = p as? Float else {
                 return
@@ -43,13 +45,16 @@ class ReactiveViewController: UIViewController {
         
         // MARK: - 按钮点击事件
         let button = UIButton.init()
-        button.reactive.controlEvents(.touchUpInside).observeValues {[weak self] (sender) in guard let self = self else {return}
+        button.reactive.controlEvents(.touchUpInside).observeValues {[weak self] (sender) in
+            guard let self = self else {return}
             
             self.msg = "按钮点击"
         }
         
         // MARK: - 通知
         notification()
+        
+        self.buttonTest.reactive.controlEvents(.touchUpInside).collect(every: DispatchTimeInterval.milliseconds(250), on: <#T##DateScheduler#>)
         
     }
 

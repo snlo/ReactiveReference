@@ -115,6 +115,17 @@ static NSString * kIdentifier = @"RACViewController_cell";
     }];
     self.tableView.delegate = self;
     
+    RACScheduler * scheduler = [RACScheduler scheduler];
+    
+    [[[[[self.buttonNext rac_signalForControlEvents:UIControlEventTouchUpInside] bufferWithTime:1 onScheduler:scheduler] map:^id _Nullable(RACTuple * _Nullable value) {
+        return @(value.count);
+    }] filter:^BOOL(id  _Nullable value) {
+        return [value integerValue] >= 2;
+    }] subscribeNext:^(id  _Nullable x) {
+        NSLog(@" --  --:%@ :-- ",x);
+    }];
+    
+
     
     
     
