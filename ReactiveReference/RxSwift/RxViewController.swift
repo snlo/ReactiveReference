@@ -20,6 +20,8 @@ class RxViewController: UIViewController {
     
     var msg = "通知"
     
+    let disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,6 +31,16 @@ class RxViewController: UIViewController {
         // MARK: - tableView config
         tableView.delegate = self
         tableView.dataSource = self
+        
+//        self.buttonTest.rx.tap.subscribe(onNext: { () in
+//            print("按钮被点击")
+//        }).disposed(by: disposeBag)
+        
+        self.buttonTest.rx.controlEvent(.touchUpInside).subscribe(onNext: { () in
+            print("按钮被点击")
+        }).disposed(by: disposeBag)
+        
+        
         
     }
 

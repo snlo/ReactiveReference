@@ -54,7 +54,6 @@ class ReactiveViewController: UIViewController {
         // MARK: - 通知
         notification()
         
-        self.buttonTest.reactive.controlEvents(.touchUpInside).collect(every: DispatchTimeInterval.milliseconds(250), on: <#T##DateScheduler#>)
         
     }
 

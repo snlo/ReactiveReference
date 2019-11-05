@@ -118,11 +118,17 @@ static NSString * kIdentifier = @"RACViewController_cell";
     RACScheduler * scheduler = [RACScheduler scheduler];
     
     [[[[[self.buttonNext rac_signalForControlEvents:UIControlEventTouchUpInside] bufferWithTime:1 onScheduler:scheduler] map:^id _Nullable(RACTuple * _Nullable value) {
+        NSLog(@"映射：%@",value);
         return @(value.count);
     }] filter:^BOOL(id  _Nullable value) {
+        NSLog(@"过滤：%@",value);
         return [value integerValue] >= 2;
     }] subscribeNext:^(id  _Nullable x) {
-        NSLog(@" --  --:%@ :-- ",x);
+        NSLog(@"结果：%@",x);
+    } error:^(NSError * _Nullable error) {
+        NSLog(@"错误：%@",error);
+    } completed:^{
+        NSLog(@"完成");
     }];
     
 
