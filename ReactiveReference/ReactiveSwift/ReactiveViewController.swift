@@ -9,7 +9,6 @@
 import UIKit
 
 import ReactiveCocoa
-import ReactiveSwift
 
 class ReactiveViewController: UIViewController {
 
@@ -54,7 +53,7 @@ class ReactiveViewController: UIViewController {
         // MARK: - 通知
         notification()
         
-        
+        instance()
     }
 
     private func notification() {
@@ -108,4 +107,51 @@ extension ReactiveViewController: UIScrollViewDelegate {
 // MARK: - notification name
 extension Notification.Name {
     public static let custome = Notification.Name("notification.customeName")
+}
+
+
+
+extension ReactiveViewController {
+    func instance() {
+        
+        // MARK: - 单击按钮事件流
+        
+        self.buttonTest.reactive.controlEvents(.touchUpInside).observe { (event) in
+            switch event {
+            case .value(let sender):
+                print("点击：\(sender)")
+            case .failed(let error):
+                print("错误：\(error)")
+            case .completed:
+                print("完成")
+            case .interrupted:
+                print("中断")
+            }
+        }
+        
+        self.buttonTest.reactive.controlEvents(.touchUpInside).observeValues { (sender) in
+            print("只关注点击 - 点击：\(sender)")
+        }
+        
+        self.buttonTest.reactive.controlEvents(.touchUpInside).observeCompleted {
+            print("只关注完成 - 完成")
+        }
+        
+        self.buttonTest.reactive.controlEvents(.touchUpInside).observeResult { (result) in
+            switch result {
+            case .success(let sender):
+                print("只关注结果 - 成功：\(sender)")
+            case .failure(let error):
+                print("只关注结果 - 错误：\(error)")
+            }
+        }
+        
+        
+        
+        
+        
+            
+            
+        
+    }
 }

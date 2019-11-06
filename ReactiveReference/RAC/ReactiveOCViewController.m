@@ -16,7 +16,7 @@ static NSString * kIdentifier = @"RACViewController_cell";
 
 @property (weak, nonatomic) IBOutlet UILabel *labelTest;
 @property (weak, nonatomic) IBOutlet UITextField *textFieldTest;
-@property (weak, nonatomic) IBOutlet UIButton *buttonNext;
+@property (weak, nonatomic) IBOutlet UIButton *buttonTest;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -37,6 +37,10 @@ static NSString * kIdentifier = @"RACViewController_cell";
     // Do any additional setup after loading the view.
     self.title = @"RAC";
     self.view.backgroundColor = [UIColor yellowColor];
+    
+    @weakify(self);
+    
+    [self fun_instance];
     
     NSArray * array = @[@(1), @(2), @(3), @(4), @(5)];
     
@@ -64,14 +68,15 @@ static NSString * kIdentifier = @"RACViewController_cell";
         );
     }];
     
-    RAC(self.buttonNext, enabled) = signalMail;
+    RAC(self.buttonTest, enabled) = signalMail;
     
-    [RACObserve(self.buttonNext, enabled) subscribeNext:^(id  _Nullable x) {
+    [RACObserve(self.buttonTest, enabled) subscribeNext:^(id  _Nullable x) {
+        @strongify(self);
         NSLog(@"button - enabled : x %@",NSStringFromClass([x class]));
         if ([x boolValue]) {
-            self.buttonNext.backgroundColor = [UIColor blueColor];
+            self.buttonTest.backgroundColor = [UIColor blueColor];
         } else {
-            self.buttonNext.backgroundColor = [UIColor grayColor];
+            self.buttonTest.backgroundColor = [UIColor grayColor];
         }
     }];
     RAC(self.textFieldTest, textColor) = [signalMail map:^id _Nullable(id  _Nullable value) {
@@ -83,7 +88,7 @@ static NSString * kIdentifier = @"RACViewController_cell";
     }];
     
 
-    RAC(self.labelTest, textColor) = [RACSignal combineLatest:@[RACObserve(self.buttonNext, enabled), self.textFieldTest.rac_textSignal] reduce:^(NSNumber * x1, NSString * x2){
+    RAC(self.labelTest, textColor) = [RACSignal combineLatest:@[RACObserve(self.buttonTest, enabled), self.textFieldTest.rac_textSignal] reduce:^(NSNumber * x1, NSString * x2){
         if ([x1 boolValue] && x2.length > 5) {
             return [UIColor greenColor];
         } else {
@@ -93,7 +98,8 @@ static NSString * kIdentifier = @"RACViewController_cell";
     
 
 #pragma mark -- 订阅信号
-    [[self.buttonNext rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
+    [[self.buttonTest rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
+        @strongify(self);
         self.labelTest.text = @"uuuu";
     }];
     
@@ -115,21 +121,7 @@ static NSString * kIdentifier = @"RACViewController_cell";
     }];
     self.tableView.delegate = self;
     
-    RACScheduler * scheduler = [RACScheduler scheduler];
     
-    [[[[[self.buttonNext rac_signalForControlEvents:UIControlEventTouchUpInside] bufferWithTime:1 onScheduler:scheduler] map:^id _Nullable(RACTuple * _Nullable value) {
-        NSLog(@"映射：%@",value);
-        return @(value.count);
-    }] filter:^BOOL(id  _Nullable value) {
-        NSLog(@"过滤：%@",value);
-        return [value integerValue] >= 2;
-    }] subscribeNext:^(id  _Nullable x) {
-        NSLog(@"结果：%@",x);
-    } error:^(NSError * _Nullable error) {
-        NSLog(@"错误：%@",error);
-    } completed:^{
-        NSLog(@"完成");
-    }];
     
 
     
@@ -159,6 +151,36 @@ static NSString * kIdentifier = @"RACViewController_cell";
 #pragma mark -- UIScrollViewDelegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     [self.view endEditing:YES];
+}
+
+- (void)fun_instance {
+    
+    // MARK: - 单击按钮事件流
+    [[self.buttonTest rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
+        NSLog(@"点击事件：%@",x);
+    } error:^(NSError * _Nullable error) {
+        NSLog(@"错误：%@",error);
+    } completed:^{
+        NSLog(@"完成");
+    }];
+    
+    // MARK: - 双击按钮事件流
+    RACScheduler * scheduler = [RACScheduler scheduler];
+
+    [[[[[self.buttonTest rac_signalForControlEvents:UIControlEventTouchUpInside] bufferWithTime:1 onScheduler:scheduler] map:^id _Nullable(RACTuple * _Nullable value) {
+        NSLog(@"映射：%@",value);
+        return @(value.count);
+    }] filter:^BOOL(id  _Nullable value) {
+        NSLog(@"过滤：%@",value);
+        return [value integerValue] >= 2;
+    }] subscribeNext:^(id  _Nullable x) {
+        NSLog(@"结果：%@",x);
+    } error:^(NSError * _Nullable error) {
+        NSLog(@"错误：%@",error);
+    } completed:^{
+        NSLog(@"完成");
+    }];
+    
 }
 
 

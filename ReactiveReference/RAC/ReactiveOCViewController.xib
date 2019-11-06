@@ -10,7 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ReactiveOCViewController">
             <connections>
-                <outlet property="buttonNext" destination="LFY-DO-fm5" id="wWj-nr-SlC"/>
+                <outlet property="buttonTest" destination="LFY-DO-fm5" id="DRm-2i-BJx"/>
                 <outlet property="labelTest" destination="q8V-rZ-WJs" id="VVn-Cx-6J9"/>
                 <outlet property="tableView" destination="ZJY-oC-fsW" id="P1O-bk-59a"/>
                 <outlet property="textFieldTest" destination="Of4-D1-Rh2" id="cD5-1J-fOS"/>
@@ -28,14 +28,14 @@
                 </tableView>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Of4-D1-Rh2">
                     <rect key="frame" x="24" y="431" width="366" height="34"/>
-                    <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q8V-rZ-WJs">
                     <rect key="frame" x="24" y="386.5" width="366" height="20.5"/>
-                    <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <nil key="highlightedColor"/>
@@ -46,7 +46,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="1Ty-nS-4TW"/>
                     </constraints>
-                    <state key="normal" title="NEXT">
+                    <state key="normal" title="Test">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <state key="disabled">
@@ -71,7 +71,7 @@
                 <constraint firstItem="Of4-D1-Rh2" firstAttribute="top" secondItem="q8V-rZ-WJs" secondAttribute="bottom" constant="24" id="yj3-V3-Kbf"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="2h6-0J-OnK"/>
-            <point key="canvasLocation" x="47.826086956521742" y="35.491071428571423"/>
+            <point key="canvasLocation" x="-304" y="29"/>
         </view>
     </objects>
 </document>
