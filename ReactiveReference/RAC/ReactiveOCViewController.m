@@ -167,7 +167,9 @@ static NSString * kIdentifier = @"RACViewController_cell";
     // MARK: - 双击按钮事件流
     RACScheduler * scheduler = [RACScheduler scheduler];
 
-    [[[[[self.buttonTest rac_signalForControlEvents:UIControlEventTouchUpInside] bufferWithTime:0.250 onScheduler:scheduler] map:^id _Nullable(RACTuple * _Nullable value) {
+    [[[[[self.buttonTest rac_signalForControlEvents:UIControlEventTouchUpInside]
+       bufferWithTime:0.250 onScheduler:scheduler]
+       map:^id _Nullable(RACTuple * _Nullable value) {
         NSLog(@"映射：%@",value);
         return @(value.count);
     }] filter:^BOOL(id  _Nullable value) {

@@ -149,7 +149,8 @@ extension ReactiveViewController {
         
         // MARK: - 双击按钮事件流
         
-        self.buttonTest.reactive.controlEvents(.touchUpInside).collect(every: DispatchTimeInterval.milliseconds(250), on: QueueScheduler.main, skipEmpty: true, discardWhenCompleted: true)
+        self.buttonTest.reactive.controlEvents(.touchUpInside)
+            .collect(every: DispatchTimeInterval.milliseconds(250), on: QueueScheduler.main, skipEmpty: true, discardWhenCompleted: true)
             .map{ $0.count }
             .filter{ $0 == 2 }
             .observeResult { (resulet) in
