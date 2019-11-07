@@ -9,6 +9,7 @@
 import UIKit
 
 import ReactiveCocoa
+import ReactiveSwift
 
 class ReactiveViewController: UIViewController {
 
@@ -128,15 +129,15 @@ extension ReactiveViewController {
                 print("中断")
             }
         }
-        
+
         self.buttonTest.reactive.controlEvents(.touchUpInside).observeValues { (sender) in
             print("只关注点击 - 点击：\(sender)")
         }
-        
+
         self.buttonTest.reactive.controlEvents(.touchUpInside).observeCompleted {
             print("只关注完成 - 完成")
         }
-        
+
         self.buttonTest.reactive.controlEvents(.touchUpInside).observeResult { (result) in
             switch result {
             case .success(let sender):
@@ -146,12 +147,19 @@ extension ReactiveViewController {
             }
         }
         
+        // MARK: - 双击按钮事件流
         
+        self.buttonTest.reactive.controlEvents(.touchUpInside).collect(every: DispatchTimeInterval.milliseconds(250), on: QueueScheduler.main, skipEmpty: true, discardWhenCompleted: true)
+            .map{ $0.count }
+            .filter{ $0 == 2 }
+            .observeResult { (resulet) in
+                print("双击：\(resulet)")
+        }
         
-        
-        
-            
             
         
     }
+    
 }
+
+

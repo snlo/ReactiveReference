@@ -108,7 +108,7 @@ extension RxViewController {
         // MARK: - 双击事件流
         self.buttonTest.rx
             .controlEvent(.touchUpInside).asObservable()
-            .buffer(timeSpan: RxTimeInterval.milliseconds(250), count: 250, scheduler: MainScheduler.init())
+            .buffer(timeSpan: RxTimeInterval.milliseconds(1000), count: 0, scheduler: MainScheduler.init())
             .map{ $0.count }
             .filter{ $0 == 2 }
             .bind { (_) in
