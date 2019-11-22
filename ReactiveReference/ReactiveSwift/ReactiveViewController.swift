@@ -17,48 +17,28 @@ class ReactiveViewController: UIViewController {
     @IBOutlet weak var labelTest: UILabel!
     @IBOutlet weak var textFieldTest: UITextField!
     @IBOutlet weak var buttonTest: UIButton!
-    
-    private var msg = ""
 
+    deinit {
+        print("销毁")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         self.title = "ReactiveSwift"
-        
-        // MARK: - tableView config
+
         tableView.delegate = self
         tableView.dataSource = self
+
         
-        
-        // MARK: - 属性监听
-        let viewProgress = UIProgressView.init()
-        // viewProgress.progress
-        viewProgress.reactive.producer(forKeyPath: "progress").startWithValues { [weak self] (p : Any?) in
-            guard let self = self else {return}
-            
-            guard let v = p as? Float else {
-                return
-            }
-            self.msg = String(v)
-        }
-        
-        
-        
-        
-        click()
-        click_double()
-        notification()
-        
+        baseOperators()
+//        click()
+//        click_double()
+//        notification()
         
     }
 
-    
-    
-    deinit {
-        print("销毁")
-    }
-    
 }
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
@@ -88,6 +68,95 @@ extension ReactiveViewController: UIScrollViewDelegate {
 // MARK: - Notification.Name
 extension Notification.Name {
     public static let custome = Notification.Name("notification.customeName")
+}
+
+extension ReactiveViewController {
+    // MARK: - 基本运算符
+    func baseOperators() {
+//        creat()
+//        map()
+        filter()
+    }
+    
+    /// 创建一个信号
+    func creat() {
+        //创建
+        let signal: Signal<Int, Error> = Signal { (observer, lifetime) in
+            
+            DispatchQueue.main.async {
+                for i in 1...5 {
+                    observer.send(value: i)
+                }
+                observer.sendCompleted()
+            }
+            
+            lifetime.observeEnded {
+                print("disposed")
+            }
+        }
+
+        //订阅
+        signal.observe { (event) in
+            switch event {
+            case .value(let n):
+                print("next:\(n)")
+                break
+            case .failed(let error):
+                print("error:\(error)")
+                break
+            case .interrupted:
+                print("interrupted")
+                break
+            case .completed:
+                print("completed")
+                break
+            }
+        }
+        
+        //创建
+        let (aSignal, aObserver) = Signal<Any, Error>.pipe()
+
+        DispatchQueue.main.async {
+            aObserver.send(value: 3)
+            aObserver.sendCompleted()
+        }
+
+        //订阅
+        aSignal.observe {
+            print($0)
+        }
+        
+    }
+    
+    /// map 映射
+    func map() {
+        let (signal, observer) = Signal<String, Error>.pipe()
+        
+        signal
+            .map { $0.uppercased() } //将小写字母映射为大写
+            .observeResult { print($0) }
+
+        observer.send(value: "a")
+        observer.send(value: "b")
+        observer.send(value: "c")
+    }
+    
+    /// filter 过滤
+    func filter() {
+        
+        let (signal, observer) = Signal<Int, Error>.pipe()
+        
+        signal
+            .filter { $0 < 5 } //过滤小于5的数据
+            .observeResult { print($0) }
+        
+        for i in 1...8 {
+            observer.send(value: i)
+        }
+        
+    }
+    
+    
 }
 
 extension ReactiveViewController {

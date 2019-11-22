@@ -121,10 +121,10 @@ static NSString * kIdentifier = @"RACViewController_cell";
     
     
 
-    
-    [self click];
-    [self click_double];
-    [self notification];
+    [self baseOperators];
+//    [self click];
+//    [self click_double];
+//    [self notification];
     
 }
 
@@ -150,6 +150,73 @@ static NSString * kIdentifier = @"RACViewController_cell";
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     [self.view endEditing:YES];
 }
+
+// MARK: - 基本运算符
+- (void)baseOperators {
+//    [self creat];
+//    [self map];
+    [self filter];
+}
+
+/// 创建一个信号
+- (void)creat {
+    //创建
+    RACSignal * signal = [RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
+        
+        for (int i = 0; i < 6; i ++) {
+            [subscriber sendNext:@(i)];
+        }
+        [subscriber sendCompleted];
+        
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"disposed");
+        }];
+    }];
+    
+    //订阅
+    [signal subscribeNext:^(id  _Nullable x) {
+        NSLog(@"next:%@",x);
+    } error:^(NSError * _Nullable error) {
+        NSLog(@"error:%@",error);
+    } completed:^{
+        NSLog(@"completed");
+    }];
+    
+}
+
+/// map 映射
+- (void)map {
+    RACSignal * signal = [RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
+        
+        [subscriber sendNext:@"a"];
+        [subscriber sendNext:@"b"];
+        [subscriber sendNext:@"c"];
+        [subscriber sendCompleted];
+        
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@"disposed");
+        }];
+    }];
+    
+    [[signal map:^id _Nullable(NSString * _Nullable value) { //将小写字母映射为大写
+        return value.uppercaseString;
+    }] subscribeNext:^(id  _Nullable x) {
+        NSLog(@"%@",x);
+    }];
+    
+}
+
+/// filter 过滤
+- (void)filter {
+    NSArray * source = @[@1, @2, @3, @4, @5, @6, @7, @8];
+    
+    [[[source.rac_sequence filter:^BOOL(id  _Nullable value) {
+        return [value integerValue] < 5; //过滤小于5的数据
+    }] signal] subscribeNext:^(id  _Nullable x) {
+        NSLog(@"%@",x);
+    }];
+}
+
 
 // MARK: - 单击按钮事件流
 - (void)click {

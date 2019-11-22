@@ -22,25 +22,26 @@ class RxViewController: UIViewController {
     
     let disposeBag = DisposeBag()
     
+    deinit {
+        print("销毁")
+        self.buttonTest = nil
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         self.title = "RxSwift"
         
-        // MARK: - tableView config
         tableView.delegate = self
         tableView.dataSource = self
         
-        click()
-        click_double()
-        notification()
         
-    }
-
-    deinit {
-        print("销毁")
-        self.buttonTest = nil
+        baseOperators()
+//        click()
+//        click_double()
+//        notification()
+        
     }
 
 }
@@ -71,6 +72,95 @@ extension RxViewController: UIScrollViewDelegate {
 // MARK: - Notification.Name
 extension Notification.Name {
     public static let customeX = Notification.Name("notification.customeNameX")
+}
+
+extension RxViewController {
+    // MARK: - 基本运算符
+    func baseOperators() {
+//        creat()
+//        map()
+        filter()
+    }
+    
+    /// 创建一个信号
+    func creat() {
+        //创建
+        let signal: Observable<Int> = Observable.create { (observer) -> Disposable in
+            for i in 1...5 {
+                observer.on(.next(i))
+            }
+            observer.onCompleted()
+            return Disposables.create {
+                print("disposed")
+            }
+        }
+        
+        //订阅
+        signal.subscribe(onNext: { (n) in
+            print("next:\(n)")
+        }, onError: { (e) in
+            print("error:\(e)")
+        }, onCompleted: {
+            print("completed")
+        }, onDisposed: {
+            print("disposed")
+        }).disposed(by: disposeBag)
+        
+        //创建
+        let aSignal: Observable<Int> = Observable.generate(initialState: 1, condition: {$0 < 5}, iterate: {$0 + 1})
+        
+        //订阅
+        aSignal.subscribe {
+            print("aSignal: \($0)")
+        }.disposed(by: disposeBag)
+        
+        //创建
+        let bSignal: Observable<Int> = Observable.generate(initialState: 0, condition: {$0 < 5}, scheduler: CurrentThreadScheduler.instance, iterate: {$0 + 1})
+        
+        //订阅
+        bSignal.subscribe {
+            print("bSignal: \($0)")
+        }.disposed(by: disposeBag)
+        
+    }
+    
+    /// map 映射
+    func map() {
+        let signal: Observable<String> = Observable.create { (observer) -> Disposable in
+            observer.on(.next("a"))
+            observer.on(.next("b"))
+            observer.on(.next("c"))
+            observer.onCompleted()
+            return Disposables.create {
+                print("disposed")
+            }
+        }
+        
+        signal
+            .map { $0.uppercased() } //将小写字母映射为大写
+            .subscribe { print($0) }
+            .disposed(by: disposeBag)
+    }
+    
+    // MARK: - filter 过滤
+    func filter() {
+        let signal: Observable<Int> = Observable.create { (observer) -> Disposable in
+            for i in 1...8 {
+                observer.onNext(i)
+            }
+            observer.onCompleted()
+            return Disposables.create {
+                print("disposed")
+            }
+        }
+        
+        signal
+            .filter { $0 < 5 } //过滤小于5的数据
+            .subscribe { print($0) }
+            .disposed(by: disposeBag)
+    }
+    
+    
 }
 
 extension RxViewController {
