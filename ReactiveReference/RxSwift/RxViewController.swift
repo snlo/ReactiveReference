@@ -32,7 +32,10 @@ class RxViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        instance()
+        click()
+        click_double()
+        notification()
+        
     }
 
     deinit {
@@ -56,7 +59,6 @@ extension RxViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    
 }
 
 // MARK: - UIScrollViewDelegate
@@ -66,13 +68,16 @@ extension RxViewController: UIScrollViewDelegate {
     }
 }
 
+// MARK: - Notification.Name
+extension Notification.Name {
+    public static let customeX = Notification.Name("notification.customeNameX")
+}
 
 extension RxViewController {
-    func instance() {
-        
-        // MARK: - 单击按钮事件流
-        
-        ///不建议使用
+    
+    // MARK: - 单击按钮事件流
+    func click() {
+        //不建议使用
         self.buttonTest.rx.controlEvent(.touchUpInside).subscribe(onNext: { (_) in
             print("点击")
         }, onError: { (error: Error) in
@@ -83,7 +88,7 @@ extension RxViewController {
             print("处理掉了")
         }).disposed(by: disposeBag)
         
-        ///不建议使用
+        //不建议使用
         self.buttonTest.rx.controlEvent(.touchUpInside).subscribe { (event) in
             switch event {
             case .next(let sender):
@@ -95,17 +100,20 @@ extension RxViewController {
             }
         }.disposed(by: disposeBag)
         
-        
         self.buttonTest.rx.controlEvent(.touchUpInside).asObservable().bind { (_) in
             print("点击")
         }.disposed(by: disposeBag)
-        ///这两个是相等的
+        
+        //这两个是相等的
+        
         self.buttonTest.rx.tap.asObservable().bind { (_) in
             print("点击")
         }.disposed(by: disposeBag)
         
-        
-        // MARK: - 双击事件流
+    }
+    
+    // MARK: - 双击事件流
+    func click_double() {
         self.buttonTest.rx
             .controlEvent(.touchUpInside).asObservable()
             .buffer(timeSpan: RxTimeInterval.milliseconds(1000), count: 0, scheduler: MainScheduler.init())
@@ -114,8 +122,17 @@ extension RxViewController {
             .bind { (_) in
                 print("双击")
         }.disposed(by: disposeBag)
+    }
+    
+    func notification() {
+        //订阅通知观察
+        NotificationCenter.default.rx.notification(.customeX, object: nil).asObservable().subscribe { (n) in
+            print(":\(n.element!.userInfo!)")
+        }.disposed(by: disposeBag)
         
-        
+        //发送通知
+        NotificationCenter.default.post(name: .customeX, object: nil, userInfo: ["user_name":"noti"])
         
     }
+    
 }

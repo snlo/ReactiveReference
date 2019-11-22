@@ -27,8 +27,7 @@ static NSString * kIdentifier = @"RACViewController_cell";
 
 @implementation ReactiveOCViewController
 
-- (void)dealloc
-{
+- (void)dealloc {
     NSLog(@"销毁");
 }
 
@@ -39,8 +38,6 @@ static NSString * kIdentifier = @"RACViewController_cell";
     self.view.backgroundColor = [UIColor yellowColor];
     
     @weakify(self);
-    
-    [self fun_instance];
     
     NSArray * array = @[@(1), @(2), @(3), @(4), @(5)];
     
@@ -125,8 +122,9 @@ static NSString * kIdentifier = @"RACViewController_cell";
     
 
     
-    
-    
+    [self click];
+    [self click_double];
+    [self notification];
     
 }
 
@@ -153,9 +151,8 @@ static NSString * kIdentifier = @"RACViewController_cell";
     [self.view endEditing:YES];
 }
 
-- (void)fun_instance {
-    
-    // MARK: - 单击按钮事件流
+// MARK: - 单击按钮事件流
+- (void)click {
     [[self.buttonTest rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
         NSLog(@"点击事件：%@",x);
     } error:^(NSError * _Nullable error) {
@@ -163,8 +160,10 @@ static NSString * kIdentifier = @"RACViewController_cell";
     } completed:^{
         NSLog(@"完成");
     }];
-    
-    // MARK: - 双击按钮事件流
+}
+
+// MARK: - 双击按钮事件流
+- (void)click_double {
     RACScheduler * scheduler = [RACScheduler scheduler];
 
     [[[[[self.buttonTest rac_signalForControlEvents:UIControlEventTouchUpInside]
@@ -182,8 +181,18 @@ static NSString * kIdentifier = @"RACViewController_cell";
     } completed:^{
         NSLog(@"完成");
     }];
-    
 }
 
+// MARK: - 通知
+- (void)notification {
+    //订阅通知观察者
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:@"notification_name" object:nil] subscribeNext:^(NSNotification * _Nullable x) {
+        NSLog(@":%@",x.userInfo);
+    }];
+    
+    //发送通知
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"notification_name" object:nil userInfo:@{@"user_name":@"noti"}];
+    
+}
 
 @end

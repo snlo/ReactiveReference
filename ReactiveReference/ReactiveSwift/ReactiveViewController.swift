@@ -43,37 +43,17 @@ class ReactiveViewController: UIViewController {
             self.msg = String(v)
         }
         
-        // MARK: - 按钮点击事件
-        let button = UIButton.init()
-        button.reactive.controlEvents(.touchUpInside).observeValues {[weak self] (sender) in
-            guard let self = self else {return}
-            
-            self.msg = "按钮点击"
-        }
         
-        // MARK: - 通知
+        
+        
+        click()
+        click_double()
         notification()
         
-        instance()
+        
     }
 
-    private func notification() {
-        /**
-         在发送前接受
-         */
-        //接受
-        var disposable = NotificationCenter.default.reactive.notifications(forName: .custome).take(during: reactive.lifetime).observeValues {[weak self] (n) in guard let self = self else {return}
-            
-            self.msg = "通知处理"
-        }
-        //发送
-        NotificationCenter.default.post(name: .custome, object: nil)
-        
-        //强制 销毁
-        disposable?.dispose()
-        disposable = nil
-        
-    }
+    
     
     deinit {
         print("销毁")
@@ -105,18 +85,15 @@ extension ReactiveViewController: UIScrollViewDelegate {
     }
 }
 
-// MARK: - notification name
+// MARK: - Notification.Name
 extension Notification.Name {
     public static let custome = Notification.Name("notification.customeName")
 }
 
-
-
 extension ReactiveViewController {
-    func instance() {
-        
-        // MARK: - 单击按钮事件流
-        
+    
+    // MARK: - 单击按钮事件流
+    func click() {
         self.buttonTest.reactive.controlEvents(.touchUpInside).observe { (event) in
             switch event {
             case .value(let sender):
@@ -147,8 +124,10 @@ extension ReactiveViewController {
             }
         }
         
-        // MARK: - 双击按钮事件流
-        
+    }
+    
+    // MARK: - 双击按钮事件流
+    func click_double() {
         self.buttonTest.reactive.controlEvents(.touchUpInside)
             .collect(every: DispatchTimeInterval.milliseconds(250), on: QueueScheduler.main, skipEmpty: true, discardWhenCompleted: true)
             .map{ $0.count }
@@ -157,9 +136,24 @@ extension ReactiveViewController {
                 print("双击：\(resulet)")
         }
         
-            
+    }
+    
+    // MARK: - 通知
+    func notification() {
+        //订阅通知观察
+        var disposable = NotificationCenter.default.reactive.notifications(forName: .custome).take(during: reactive.lifetime).observeValues {[weak self] (n) in
+            guard let self = self else {return}
+            print("\(self):\(n.userInfo!)")
+        }
+        //发送通知
+        NotificationCenter.default.post(name: .custome, object: nil, userInfo: ["user_name":"noti"])
+        
+        // 强制销毁
+        disposable?.dispose()
+        disposable = nil
         
     }
+    
     
 }
 
