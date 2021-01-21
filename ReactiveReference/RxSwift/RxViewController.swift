@@ -38,7 +38,7 @@ class RxViewController: UIViewController {
         
         
         baseOperators()
-//        click()
+        click()
 //        click_double()
 //        notification()
         
